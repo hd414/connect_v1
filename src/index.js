@@ -3,11 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { FieldValue, firebase } from './lib/firebase';
+import firebaseContext from './context/firebaseContext';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <BrowserRouter>
+    <firebaseContext.Provider value={{ FieldValue, firebase }}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </firebaseContext.Provider>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
