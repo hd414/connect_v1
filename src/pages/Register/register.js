@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import firebaseContext from '../../context/firebaseContext';
+import doesUserExists from '../../services/firebase';
 
 const Register = () => {
 
@@ -22,7 +23,30 @@ const Register = () => {
     const RegisterHandler = async (event) => {
         event.preventDefault();
         try {
-            await firebase.auth().signInWithEmailAndPassword(email, password);
+            let len = await doesUserExists(username);
+            if (len > 0) {
+                setError("this username already exists , please try another");
+                return;
+            }
+            const res = await firebase.auth()
+                .createUserWithEmailAndPassword(email, password)
+
+            await res.user.updateProfile({
+                displayName: username
+            });
+
+            await firebase.firestore()
+                .collection('users')
+                .add({
+                    user_id: res.user.uid,
+                    username: username.toLowerCase(),
+                    email,
+                    name,
+                    password,
+                    following: [],
+                    followers: [],
+                    createdAt: Date.now()
+                });
             History.push('/');
         }
         catch (e) {
@@ -99,7 +123,7 @@ const Register = () => {
                 </form>
                 <div className="mt-4 flex justify-center items-center flex-col w-full bg-white p-4 border border-gray-primary">
                     <p className="text-sm">Already have an account ?{' '}
-                        <Link to='/register' className="font-bold text-blue-medium" >
+                        <Link to='/login' className="font-bold text-blue-medium" >
                             Log In
                         </Link>
                     </p>
