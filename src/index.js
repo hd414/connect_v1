@@ -1,3 +1,4 @@
+import './wdyr';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -6,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { FieldValue, firebase } from './lib/firebase';
 import firebaseContext from './context/firebaseContext';
 import { BrowserRouter } from 'react-router-dom';
+
 
 ReactDOM.render(
   <BrowserRouter>

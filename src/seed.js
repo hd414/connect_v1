@@ -3,37 +3,37 @@
 export function seedDatabase(firebase) {
     const users = [
         {
-            userId: 'iUGmTF1ppIdZIoKOEm3fFqKv9FT2',
+            user_id: 'iUGmTF1ppIdZIoKOEm3fFqKv9FT2',
             username: 'karl',
-            fullName: 'Karl Hadwen',
-            emailAddress: 'karlhadwen@gmail.com',
+            name: 'Karl Hadwen',
+            email: 'karlhadwen@gmail.com',
             following: ['2'],
             followers: ['2', '3', '4'],
             dateCreated: Date.now()
         },
         {
-            userId: '2',
+            user_id: '2',
             username: 'raphael',
-            fullName: 'Raffaello Sanzio da Urbino',
-            emailAddress: 'raphael@sanzio.com',
+            name: 'Raffaello Sanzio da Urbino',
+            email: 'raphael@sanzio.com',
             following: [],
             followers: ['iUGmTF1ppIdZIoKOEm3fFqKv9FT2'],
             dateCreated: Date.now()
         },
         {
-            userId: '3',
+            user_id: '3',
             username: 'dali',
-            fullName: 'Salvador Dalí',
-            emailAddress: 'salvador@dali.com',
+            name: 'Salvador Dalí',
+            email: 'salvador@dali.com',
             following: [],
             followers: ['iUGmTF1ppIdZIoKOEm3fFqKv9FT2'],
             dateCreated: Date.now()
         },
         {
-            userId: '4',
+            user_id: '4',
             username: 'orwell',
-            fullName: 'George Orwell',
-            emailAddress: 'george@orwell.com',
+            name: 'George Orwell',
+            email: 'george@orwell.com',
             following: [],
             followers: ['iUGmTF1ppIdZIoKOEm3fFqKv9FT2'],
             dateCreated: Date.now()
@@ -52,7 +52,7 @@ export function seedDatabase(firebase) {
             .collection('photos')
             .add({
                 photoId: i,
-                userId: '2',
+                user_id: '2',
                 imageSrc: `/images/users/raphael/${i}.jpg`,
                 caption: 'Saint George and the Dragon',
                 likes: [],

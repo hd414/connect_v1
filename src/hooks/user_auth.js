@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useContext, useEffect, useState } from "react";
 import firebaseContext from "../context/firebaseContext";
 
@@ -22,7 +22,7 @@ const UserAuthListener = () => {
         return () => listner();
     }, [firebase])
 
-    return { user };
+    return { user, setUser };
 }
 
 

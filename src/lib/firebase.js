@@ -4,6 +4,7 @@ import 'firebase/auth';
 
 
 
+
 const config = {
     apiKey: "AIzaSyBuCTYUCjh-Ki7-rvByJXTtgy7SieJcz7I",
     authDomain: "connect-1cebd.firebaseapp.com",
@@ -16,7 +17,10 @@ const config = {
 export const firebase = Firebase.initializeApp(config);
 
 
-export const { FieldValue } = firebase.firestore;
+
+
+
+export const { FieldValue } = Firebase.firestore;
 
 
 

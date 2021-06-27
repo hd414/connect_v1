@@ -6,7 +6,6 @@ import UserContext from '../../context/userContext'
 const Header = () => {
 
     const { user } = useContext(UserContext);
-    console.log(user);
     const { firebase } = useContext(firebaseContext);
     const history = useHistory();
 
