@@ -74,11 +74,12 @@ const Header = () => {
                                         </button>
 
                                         <div className="flex items-center cursor-pointer">
-                                            <Link to={`/p/${user?.username}`}>
+
+                                            <Link to={`/profile/${user?.displayName}`}>
                                                 <img
                                                     className="rounded-full h-8 w-8 flex"
-                                                    src={`/images/avatars/${user?.username}.jpg`}
-                                                    alt={`${user?.username} profile`}
+                                                    src={`/images/avatars/${user?.displayName}.jpg`}
+                                                    alt={`${user?.displayName} profile`}
                                                     onError={(e) => {
                                                         e.target.src = '/images/avatars/default.png';
                                                     }}

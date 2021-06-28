@@ -28,6 +28,21 @@ export const getUserById = async (id) => {
     return userData;
 }
 
+export const getUserByUsername = async (username) => {
+
+    const res = await firebase.firestore()
+        .collection('users')
+        .where('username', '==', username)
+        .get();
+    const userData = res.docs.map((item) => {
+        return {
+            ...item.data(),
+            docId: item.id
+        }
+    })
+    return userData;
+}
+
 export const getSuggestions = async (id, following) => {
     const res = await firebase.firestore()
         .collection('users')
@@ -107,4 +122,18 @@ export const getFollowingUserPhotos = async (userId, following) => {
     catch (e) {
         console.log(e.message);
     }
+}
+
+export const getUserPhotosByUserId = async (id) => {
+    const result = await firebase
+        .firestore()
+        .collection('photos')
+        .where('user_id', '==', id)
+        .get();
+
+    const photos = result.docs.map((photo) => ({
+        ...photo.data(),
+        docId: photo.id
+    }));
+    return photos;
 }
