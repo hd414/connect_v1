@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useEffect } from 'react';
 import { useReducer } from 'react';
 import { getUserPhotosByUserId } from '../../services/firebase';
 import Header from './profileHeader/header';
 import Photos from './profilepics/photos';
+import PropTypes from 'prop-types';
 
 const ProfileDetails = ({ user }) => {
 
@@ -19,13 +20,14 @@ const ProfileDetails = ({ user }) => {
         initialState
     );
 
+
+
     useEffect(() => {
         const getProfileInfoAndPhotos = async () => {
             const photos = await getUserPhotosByUserId(user.user_id);
-            console.log(photos)
+            // console.log(photos)
             dispatch({ profile: user, photosCollection: photos, followerCount: user.followers.length });
         }
-        console.log(user);
         getProfileInfoAndPhotos();
     }, [user.username]);
 
@@ -43,3 +45,16 @@ const ProfileDetails = ({ user }) => {
 }
 
 export default ProfileDetails
+
+
+ProfileDetails.propTypes = {
+    user: PropTypes.shape({
+        createdAt: PropTypes.number,
+        email: PropTypes.string,
+        followers: PropTypes.array,
+        following: PropTypes.array,
+        name: PropTypes.string,
+        user_id: PropTypes.string,
+        username: PropTypes.string
+    })
+};

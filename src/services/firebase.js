@@ -25,6 +25,7 @@ export const getUserById = async (id) => {
             docId: item.id
         }
     })
+    console.log(userData)
     return userData;
 }
 
@@ -136,4 +137,40 @@ export const getUserPhotosByUserId = async (id) => {
         docId: photo.id
     }));
     return photos;
+}
+
+
+export async function toggleFollow(
+    isFollowingProfile,
+    activeUserDocId,
+    profileDocId,
+    profileUserId,
+    followingUserId
+) {
+    // 1st param: karl's doc id
+    // 2nd param: raphael's user id
+    // 3rd param: is the user following this profile? e.g. does karl follow raphael? (true/false)
+    await UpdateFollowing(activeUserDocId, profileUserId, isFollowingProfile);
+
+    // 1st param: karl's user id
+    // 2nd param: raphael's doc id
+    // 3rd param: is the user following this profile? e.g. does karl follow raphael? (true/false)
+    await UpdateFollowers(profileDocId, followingUserId, isFollowingProfile);
+}
+
+
+export async function isUserFollowingProfile(loggedInUserUsername, profileUserId) {
+    const result = await firebase
+        .firestore()
+        .collection('users')
+        .where('username', '==', loggedInUserUsername) // karl (active logged in user)
+        .where('following', 'array-contains', profileUserId)
+        .get();
+
+    const response = result.docs.map((item) => ({
+        ...item.data(),
+        docId: item.id
+    }));
+
+    return response.length > 0
 }
